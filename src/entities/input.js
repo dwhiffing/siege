@@ -8,11 +8,12 @@ export default class InputManager {
       right: Phaser.KeyCode.RIGHT,
       space: Phaser.KeyCode.SPACEBAR,
       z: Phaser.KeyCode.Z,
+      x: Phaser.KeyCode.X,
     })
   }
 
   update() {
-    const { cursor, board } = this.game
+    const { cursor, board, spawner } = this.game
 
     if (this._justPressed('up')) {
       cursor.move('y', -1)
@@ -40,7 +41,11 @@ export default class InputManager {
     }
 
     if (this._justPressed('z')) {
-      board.checkForMatches()
+      spawner.spawn(1)
+    }
+
+    if (this._justPressed('x')) {
+      spawner.spawn(1, true)
     }
   }
 

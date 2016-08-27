@@ -9,13 +9,13 @@ import {
 } from '../constants'
 
 export default class Board {
-  constructor(game) {
+  constructor(game, _x=0, _y=0) {
     this.game = game
     this.tiles = game.add.group()
     this.tiles.classType = Tile
 
-    for (let x = 0; x < NUM_COLUMNS; x++) {
-      for (let y = 0; y < NUM_ROWS; y++) {
+    for (let x = _x; x < NUM_COLUMNS+_x; x++) {
+      for (let y = _y; y < NUM_ROWS+_y; y++) {
         let tile = this.tiles.create(x, y, 'tiles')
       }
     }
