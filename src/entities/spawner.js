@@ -15,7 +15,7 @@ export default class Spawner {
   update() {
     this.units.children.forEach((unit) => {
       if (unit.alive) {
-        unit.x += 2
+        unit.x += unit.speed
         if (unit.x > 800) {
           unit.kill()
         }
@@ -23,9 +23,11 @@ export default class Spawner {
     })
   }
 
-  spawn() {
+  spawn(frame) {
     let unit = this.units.getFirstDead()
     unit.reset(-10, 360)
+    unit.speed = this.game.rnd.integerInRange(100, 400) / 100
+    unit.frame = frame
   }
 
   randomizeColor(tile) {

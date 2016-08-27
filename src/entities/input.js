@@ -1,6 +1,7 @@
 export default class InputManager {
   constructor(game) {
     this.game = game
+    this.allowInput = true
     this.keys = game.input.keyboard.addKeys({
       up: Phaser.KeyCode.UP,
       down: Phaser.KeyCode.DOWN,
@@ -12,6 +13,9 @@ export default class InputManager {
     })
   }
   update() {
+    if (!this.allowInput) {
+      return
+    }
     if (this.keys.up.downDuration(1)) {
       this.game.cursor.move('y', -1)
     } else if (this.keys.down.downDuration(1)) {
