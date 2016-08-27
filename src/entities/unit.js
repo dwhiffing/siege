@@ -25,6 +25,11 @@ export default class Unit extends Phaser.Sprite {
     this.hasOverlapped = false
 
     if (this.x > 1400 || this.x < -40) {
+      if (this.x > 1400) {
+        this.game.castle2.damage(20)
+      } else {
+        this.game.castle.damage(20)
+      }
       this.kill()
     }
   }
