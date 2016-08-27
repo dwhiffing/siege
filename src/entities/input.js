@@ -33,7 +33,7 @@ export default class InputManager {
       }
     }
     if (this.keys.x.downDuration(1)) {
-      this.game.cursor.deselect()
+      this.game.board.checkForMatches()
     }
   }
 }

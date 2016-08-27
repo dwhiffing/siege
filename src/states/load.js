@@ -7,6 +7,6 @@ export default {
   },
 
   onLoadComplete() {
-    this.game.state.start('menu')
+    this.game.state.start('play')
   }
 }

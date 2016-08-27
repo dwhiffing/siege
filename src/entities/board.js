@@ -3,6 +3,9 @@ const OFFSET_Y = 20
 const TILE_DIMENSIONS = 50
 const TILE_SPACING = 5
 const TILE_SIZE = TILE_DIMENSIONS + TILE_SPACING
+const MATCH_TYPES = [
+  [1, 1, 2, 2],
+]
 
 export default class Board {
   constructor(game) {
@@ -53,6 +56,40 @@ export default class Board {
 
   getId(x, y) {
     return x + y * this.cols
+  }
+
+  getRectOfTiles(x, size) {
+    let posX = this.cols * (this.rows - 2) + x
+    let tiles = []
+    for (let i = posX; i < this.cols * this.rows; i += this.cols) {
+      for (let j = 0; j < size; j++) {
+        let tile = this.tiles.iterate("id", i+j, Phaser.Group.RETURN_CHILD)
+        tiles.push(tile.frame)
+      }
+    }
+    return tiles
+  }
+
+  checkForMatches() {
+    let tiles = this.getRectOfTiles(0, 2)
+    let matches = MATCH_TYPES.filter(type => this.arraysEqual(type, tiles))
+    if (matches.length > 0) {
+      this.game.spawner.spawn()
+    }
+  }
+
+  arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+      return false
+    }
+
+    for (let i = arr1.length; i--;) {
+      if (arr1[i] !== arr2[i]) {
+        return false
+      }
+    }
+
+    return true
   }
 
   swap(x1, y1, x2, y2) {
