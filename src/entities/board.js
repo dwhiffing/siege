@@ -1,3 +1,6 @@
+import { arraysEqual } from '../utils'
+import Tile from './tile'
+
 const OFFSET_X = 20
 const OFFSET_Y = 20
 const TILE_DIMENSIONS = 50
@@ -13,42 +16,28 @@ const MATCH_TYPES = [
 export default class Board {
   constructor(game) {
     this.game = game
-
     this.cols = 6
     this.rows = 5
     this.tiles = game.add.group()
+    this.tiles.classType = Tile
 
     for (let x = 0; x < this.cols; x++) {
       for (let y = 0; y < this.rows; y++) {
-        let tile = this.tiles.create(...this.getTilePos(x, y), 'tiles')
-        this.randomizeColor(tile)
+        let tile = this.tiles.create(...this.getTileWorldPosition(x, y), 'tiles')
         this.setPos(tile, x, y)
       }
     }
-
   }
 
-  getTilePos(x, y) {
+  getTileWorldPosition(x, y) {
     return [
       x * TILE_SIZE + OFFSET_X,
       y * TILE_SIZE + OFFSET_Y,
     ]
   }
 
-  randomizeColor(tile) {
-    tile.frame = this.game.rnd.integerInRange(0, tile.animations.frameTotal - 1)
-  }
-
-  update() {
-
-  }
-
   getTile(x, y) {
     return this.tiles.iterate("id", this.getId(x, y), Phaser.Group.RETURN_CHILD)
-  }
-
-  getPos(pos) {
-    return Math.floor(pos / TILE_SIZE)
   }
 
   setPos(tile, x, y) {
@@ -61,17 +50,23 @@ export default class Board {
     return this.game.add.tween(tile).to({ x, y, }, 300, Phaser.Easing.Quadratic.In, true)
   }
 
+  updatePos(tile, x1, y1) {
+    const [x2, y2] = this.getTileWorldPosition(x1, y1)
+    this.setPos(tile, x1, y1)
+    this.tweenPos(tile, x2, y2)
+  }
+
   getId(x, y) {
     return x + y * this.cols
   }
 
   getRectOfTiles(x, size) {
-    let posX = this.cols * (this.rows - 2) + x
+    let secondLastRow = this.cols * (this.rows - 2)
+    let posX = secondLastRow + x
     let tiles = []
     for (let i = posX; i < this.cols * this.rows; i += this.cols) {
       for (let j = 0; j < size; j++) {
-        let tile = this.tiles.iterate("id", i+j, Phaser.Group.RETURN_CHILD)
-        tiles.push(tile)
+        tiles.push(this.tiles.iterate("id", i+j, Phaser.Group.RETURN_CHILD))
       }
     }
     return tiles
@@ -82,7 +77,7 @@ export default class Board {
 
     tileGroups.forEach(tiles => {
       let types = tiles.map(t => t.frame)
-      let matches = MATCH_TYPES.filter(type => this.arraysEqual(type, types))
+      let matches = MATCH_TYPES.filter(type => arraysEqual(type, types))
       if (matches.length > 0) {
         this.game.spawner.spawn(types[0])
 
@@ -97,28 +92,12 @@ export default class Board {
     this.refill()
   }
 
-  arraysEqual(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
-      return false
-    }
-
-    for (let i = arr1.length; i--;) {
-      if (arr1[i] !== arr2[i]) {
-        return false
-      }
-    }
-
-    return true
-  }
-
   swap(x1, y1, x2, y2) {
     const tile1 = this.getTile(x1, y1)
     const tile2 = this.getTile(x2, y2)
-    const { posX: tempPosX, posY: tempPosY, x: tempX, y: tempY } = tile1
-    this.setPos(tile1, tile2.posX, tile2.posY)
-    this.tweenPos(tile1, tile2.x, tile2.y)
-    this.setPos(tile2, tempPosX, tempPosY)
-    this.tweenPos(tile2, tempX, tempY)
+    const { posX: tX, posY: tY } = tile1
+    this.updatePos(tile1, tile2.posX, tile2.posY)
+    this.updatePos(tile2, tX, tY)
   }
 
   applyGravity() {
@@ -130,8 +109,7 @@ export default class Board {
         if (tile === null) {
           dropAmount++
         } else if (dropAmount > 0) {
-          this.setPos(tile, tile.posX, tile.posY + dropAmount)
-          this.tweenPos(tile, ...this.getTilePos(tile.posX, tile.posY))
+          this.updatePos(tile, tile.posX, tile.posY + dropAmount)
         }
       }
     }
@@ -146,10 +124,8 @@ export default class Board {
         if (!tile) {
           localMissingCount++
           tile = this.tiles.getFirstDead()
-          tile.reset(...this.getTilePos(i, -localMissingCount))
-          this.randomizeColor(tile)
-          this.setPos(tile, i, j)
-          this.tweenPos(tile, ...this.getTilePos(i, j))
+          tile.reset(...this.getTileWorldPosition(i, -localMissingCount))
+          this.updatePos(tile, i, j)
         }
       }
       missingCount = Math.max(missingCount, localMissingCount)

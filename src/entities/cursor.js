@@ -15,7 +15,7 @@ export default class Cursor {
   }
 
   updatePosition(thing, x=thing.x, y=thing.y) {
-    const [X, Y] = this.game.board.getTilePos(x, y)
+    const [X, Y] = this.game.board.getTileWorldPosition(x, y)
     thing.x = X
     thing.y = Y
   }
