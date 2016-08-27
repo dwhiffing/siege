@@ -9,12 +9,8 @@ export default class Unit extends Phaser.Sprite {
     this.kill()
   }
 
-  randomType() {
-    return this.game.rnd.integerInRange(0, this.animations.frameTotal - 1)
-  }
-
   reset(x, y, frame) {
-    this.frame = frame || this.randomType()
+    this.frame = frame || this.game.rnd.integerInRange(0, this.animations.frameTotal - 1)
     this.speed = this.game.rnd.integerInRange(100, 400) / 100
     super.reset(x, y)
   }
