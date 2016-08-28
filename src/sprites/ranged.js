@@ -22,7 +22,7 @@ export default class Ranged extends Unit {
 
   reset(x, y, direction) {
     super.reset(x, y, direction)
-    this.x = this.game.rnd.integerInRange(1, 3) * 40 * direction + x
+    this.x = this.game.rnd.integerInRange(1, 3) * 20 * direction + x
     this.direction = direction
     this.animations.play('idle')
   }

@@ -1,7 +1,9 @@
-import Soldier from '../sprites/soldier'
-import Archer from '../sprites/archer'
-import Catapult from '../sprites/catapult'
-import Sling from '../sprites/sling'
+import Soldier from '../units/soldier'
+import Knight from '../units/knight'
+import Elephant from '../units/elephant'
+import Archer from '../units/archer'
+import Catapult from '../units/catapult'
+import Sling from '../units/sling'
 
 export default class Castle {
   constructor(game, x, y, name) {
@@ -10,6 +12,14 @@ export default class Castle {
     this.soldiers = game.add.group(undefined, 'soldiers', false, true)
     this.soldiers.classType = Soldier
     this.soldiers.createMultiple(30, 'soldier')
+
+    this.knights = game.add.group(undefined, 'knights', false, true)
+    this.knights.classType = Knight
+    this.knights.createMultiple(30, 'soldier')
+
+    this.elephants = game.add.group(undefined, 'elephants', false, true)
+    this.elephants.classType = Elephant
+    this.elephants.createMultiple(30, 'soldier')
 
     this.archers = game.add.group(undefined, 'archers', false, true)
     this.archers.classType = Archer
@@ -51,20 +61,28 @@ export default class Castle {
     thing.reset(x, 680, otherSide ? -1 : 1)
   }
 
-  spawnCatapult(otherSide) {
-    this.spawn('catapults', otherSide)
-  }
-
   spawnSoldier(otherSide) {
     this.spawn('soldiers', otherSide)
+  }
+
+  spawnKnight(otherSide) {
+    this.spawn('knights', otherSide)
+  }
+
+  spawnElephant(otherSide) {
+    this.spawn('elephants', otherSide)
+  }
+
+  spawnSling(otherSide) {
+    this.spawn('slings', otherSide)
   }
 
   spawnArcher(otherSide) {
     this.spawn('archers', otherSide)
   }
 
-  spawnSling(otherSide) {
-    this.spawn('slings', otherSide)
+  spawnCatapult(otherSide) {
+    this.spawn('catapults', otherSide)
   }
 
   damage(amount) {

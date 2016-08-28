@@ -8,14 +8,20 @@ export default class InputManager {
       right: Phaser.KeyCode.RIGHT,
       space: Phaser.KeyCode.SPACEBAR,
       z: Phaser.KeyCode.Z,
-      n: Phaser.KeyCode.N,
-      m: Phaser.KeyCode.M,
-      j: Phaser.KeyCode.J,
-      h: Phaser.KeyCode.H,
+
+      e: Phaser.KeyCode.E,
+      r: Phaser.KeyCode.R,
+      d: Phaser.KeyCode.D,
+      f: Phaser.KeyCode.F,
+      c: Phaser.KeyCode.C,
+      v: Phaser.KeyCode.V,
+
+      t: Phaser.KeyCode.T,
       y: Phaser.KeyCode.Y,
-      u: Phaser.KeyCode.U,
-      i: Phaser.KeyCode.I,
-      o: Phaser.KeyCode.O,
+      g: Phaser.KeyCode.G,
+      h: Phaser.KeyCode.H,
+      b: Phaser.KeyCode.B,
+      n: Phaser.KeyCode.N,
     })
   }
 
@@ -51,36 +57,52 @@ export default class InputManager {
       board.checkForMatches()
     }
 
-    if (this._justPressed('n')) {
+    if (this._justPressed('e')) {
       castle.spawnSoldier()
     }
 
-    if (this._justPressed('m')) {
+    if (this._justPressed('r')) {
       castle.spawnSoldier(true)
     }
 
-    if (this._justPressed('h')) {
-      castle.spawnArcher()
+    if (this._justPressed('d')) {
+      castle.spawnKnight()
     }
 
-    if (this._justPressed('j')) {
-      castle.spawnArcher(true)
+    if (this._justPressed('f')) {
+      castle.spawnKnight(true)
     }
 
-    if (this._justPressed('y')) {
-      castle.spawnCatapult()
+    if (this._justPressed('c')) {
+      castle.spawnElephant()
     }
 
-    if (this._justPressed('u')) {
-      castle.spawnCatapult(true)
+    if (this._justPressed('v')) {
+      castle.spawnElephant(true)
     }
 
-    if (this._justPressed('i')) {
+    if (this._justPressed('t')) {
       castle.spawnSling()
     }
 
-    if (this._justPressed('o')) {
+    if (this._justPressed('y')) {
       castle.spawnSling(true)
+    }
+
+    if (this._justPressed('g')) {
+      castle.spawnArcher()
+    }
+
+    if (this._justPressed('h')) {
+      castle.spawnArcher(true)
+    }
+
+    if (this._justPressed('b')) {
+      castle.spawnCatapult()
+    }
+
+    if (this._justPressed('n')) {
+      castle.spawnCatapult(true)
     }
   }
 

@@ -11,14 +11,15 @@ const ANIMATIONS = {
 export default class Soldier extends Unit {
   constructor(game, x, y, key, frame) {
     super(game, x, y, key, frame)
+    this.sizeX = 10
+    this.sizeY = 15
     this.addAnimations(ANIMATIONS)
   }
 
   reset(x, y, direction) {
     super.reset(x, y, direction)
     this.animations.play('walk')
-    this.body.setSize(10, 15, direction === 1 ? 0 : -5, 0);
-    this.speed = this.game.rnd.integerInRange(MIN_SPEED,MAX_SPEED) * direction
+    this.body.setSize(this.sizeX, this.sizeY, direction === 1 ? 0 : -5, 0)
     this.body.velocity.x = this.speed
   }
 
