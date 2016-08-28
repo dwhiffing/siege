@@ -33,7 +33,7 @@ export default class Board {
   checkForMatches() {
     let matches = this._getMatches()
     matches.forEach(tiles => {
-      this.game.spawner.spawn(tiles[0].frame)
+      this.game.spawner.spawnUnit()
       tiles.forEach((tile) => tile.kill())
     })
 

@@ -8,7 +8,7 @@ import MenuState from './states/menu'
 import OverState from './states/gameover'
 import PlayState from './states/play'
 
-let game = new Phaser.Game(1080, 720, Phaser.CANVAS, 'app')
+let game = new Phaser.Game(1334, 750, Phaser.CANVAS, 'app')
 
 game.state.add('boot', BootState)
 game.state.add('load', LoadState)

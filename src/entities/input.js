@@ -8,7 +8,10 @@ export default class InputManager {
       right: Phaser.KeyCode.RIGHT,
       space: Phaser.KeyCode.SPACEBAR,
       z: Phaser.KeyCode.Z,
-      x: Phaser.KeyCode.X,
+      n: Phaser.KeyCode.N,
+      m: Phaser.KeyCode.M,
+      j: Phaser.KeyCode.J,
+      h: Phaser.KeyCode.H,
     })
   }
 
@@ -41,11 +44,23 @@ export default class InputManager {
     }
 
     if (this._justPressed('z')) {
-      spawner.spawn(1)
+      board.checkForMatches()
     }
 
-    if (this._justPressed('x')) {
-      spawner.spawn(1, true)
+    if (this._justPressed('n')) {
+      spawner.spawnUnit()
+    }
+
+    if (this._justPressed('m')) {
+      spawner.spawnUnit(true)
+    }
+
+    if (this._justPressed('h')) {
+      spawner.spawnArcher()
+    }
+
+    if (this._justPressed('j')) {
+      spawner.spawnArcher(true)
     }
   }
 

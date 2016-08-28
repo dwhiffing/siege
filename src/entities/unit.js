@@ -1,20 +1,32 @@
 import Phaser from 'phaser'
 
+// const MIN_SPEED = 10
+// const MAX_SPEED = 30
+
+const MIN_SPEED = 100
+const MAX_SPEED = 120
+
 export default class Unit extends Phaser.Sprite {
   constructor(game, x, y, key, frame) {
     super(game, x, y, key, frame)
     this.anchor.x = 0.5
     this.anchor.y = 1
+    this.scale.set(3,3)
     this.game = game
-    // this.kill()
+    this.animations.add('idle', [0], 2, true)
+    this.animations.add('walk', [0, 1, 0, 2], 2, true)
+    this.animations.add('attack', [0, 3, 4], 5)
   }
 
   reset(x, y, frame, direction=1) {
     super.reset(x, y, 10)
     this.frame = frame || this.game.rnd.integerInRange(0, this.animations.frameTotal - 1)
+    this.animations.play('walk')
     this.direction = direction
-    this.body.setSize(40, 50, direction === 1 ? 0 : -20, 0);
-    this.speed = 200 * direction
+    this.scale.x = direction * 3
+    this.tint = direction === 1 ? 0xff9999 : 0x9999ff
+    this.body.setSize(10, 15, direction === 1 ? 0 : -5, 0);
+    this.speed = this.game.rnd.integerInRange(MIN_SPEED,MAX_SPEED) * direction
     this.body.velocity.x = this.speed
   }
 
@@ -41,10 +53,12 @@ export default class Unit extends Phaser.Sprite {
   }
 
   stop() {
+    // this.animations.play('idle')
     if (this.body.velocity.x !== 0) {
       this.body.velocity.x = 0
       setTimeout(() => {
         if (!this.hasOverlapped) {
+          // this.animations.play('walk')
           this.body.velocity.x = this.speed
         }
       }, 500)
@@ -80,10 +94,11 @@ export default class Unit extends Phaser.Sprite {
   }
 
   attack(unit) {
+    this.animations.play('attack')
     this.isAttacking = true
     const tween = this.game.add.tween(this)
     tween.to({
-        angle: 20 * this.direction,
+        angle: 5 * this.direction,
       },
       200,
       Phaser.Easing.Quadratic.InOut,

@@ -1,11 +1,15 @@
-import Unit from './Unit'
+import Unit from './unit'
+import Archer from './archer'
 
 export default class Spawner {
   constructor(game) {
     this.game = game
     this.units = game.add.group(undefined, 'units', false, true)
     this.units.classType = Unit
-    this.units.createMultiple(40, 'units')
+    this.units.createMultiple(30, 'soldier')
+    this.archers = game.add.group(undefined, 'units', false, true)
+    this.archers.classType = Archer
+    this.archers.createMultiple(30, 'archer')
   }
 
   update() {
@@ -23,9 +27,17 @@ export default class Spawner {
     this.units.callAll('render')
   }
 
-  spawn(frame, otherSide) {
-    let unit = this.units.getFirstDead()
-    const x = otherSide ? 1100 : -10
-    unit.reset(x, 580, frame, otherSide ? -1 : 1)
+  spawn(type, otherSide) {
+    let thing = this[type].getFirstDead()
+    const x = otherSide ? 1290 : 30
+    thing.reset(x, 680, 0, otherSide ? -1 : 1)
+  }
+
+  spawnUnit(otherSide) {
+    this.spawn('units', otherSide)
+  }
+
+  spawnArcher(otherSide) {
+    this.spawn('archers', otherSide)
   }
 }
