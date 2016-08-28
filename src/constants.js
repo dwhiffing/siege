@@ -7,15 +7,48 @@ export const NUM_COLUMNS = 6
 export const NUM_ROWS = 5
 export const TILE_SIZE = TILE_DIMENSIONS + TILE_SPACING
 export const MATCH_TYPES = [
-  [0, 0, 0, 0],
-  [1, 1, 1, 1],
-  [2, 2, 2, 2],
-  [3, 3, 3, 3],
+  [
+    1, 0,
+    1, 0,
+  ], [
+    1, 0, 1, 0,
+    1, 0, 1, 0,
+  ], [
+    1, 0, 1, 0, 1, 0,
+    1, 0, 1, 0, 1, 0,
+  ], [
+    1, 0,
+    0, 1,
+  ], [
+    1, 0, 1, 0,
+    0, 1, 0, 1,
+  ], [
+    1, 0, 1, 0, 1, 0,
+    0, 1, 0, 1, 0, 1,
+  ], [
+    1, 1,
+    0, 0,
+  ], [
+    1, 1, 1, 1,
+    0, 0, 0, 0,
+  ], [
+    1, 1, 1, 1, 1, 1,
+    0, 0, 0, 0, 0, 0,
+  ]
 ]
+
+// shape index + tile type = index
+export const UNIT_TYPES = [
+  'soldier', 'sling', 'airman', 'patch',
+  'knight', 'archer', 'airship', 'wall',
+  'elephant', 'catapult', 'zeplin', 'repair',
+]
+
 export const TILE_SHAPES = [
   [0, 2],
-  [1, 2],
   [2, 2],
-  [3, 2],
   [4, 2],
+  [0, 4],
+  [2, 4],
+  [0, 6],
 ]

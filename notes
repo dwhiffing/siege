@@ -48,17 +48,11 @@ Units
   pattern determines what unit you get
   size determines power/quantity of that unit
 
-  iron/melee
-  wood/ranged
-  air/flying
-  fire/magic
-
-
 checklist
   basic gameplay
-    melee units
-    ranged units
-    explosions
+    melee units -
+    ranged units -
+    explosions -
     ai sends units
     screen shake on castle damage
   basic graphics

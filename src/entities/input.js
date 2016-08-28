@@ -54,7 +54,7 @@ export default class InputManager {
     }
 
     if (this._justPressed('z')) {
-      board.checkForMatches()
+      board.submitMatches()
     }
 
     if (this._justPressed('e')) {

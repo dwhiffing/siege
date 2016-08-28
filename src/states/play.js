@@ -17,6 +17,7 @@ export default {
     this.game.castle = new Castle(game, -100, 530, '1')
     this.game.castle2 = new Castle(game, 1280, 530, '2')
     this.game.blasts = new BlastManager(game)
+    this.game.board.checkForMatches()
   },
 
   update() {

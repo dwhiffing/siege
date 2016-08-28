@@ -16,7 +16,7 @@ export default class Tile extends Phaser.Sprite {
 
   reset(x, y, frame) {
     super.reset(x, y)
-    this.frame = frame || this.game.rnd.integerInRange(0, this.animations.frameTotal - 1)
+    this.frame = frame || this.game.rnd.integerInRange(0, 3)
     this.moveTo(x, y)
   }
 
