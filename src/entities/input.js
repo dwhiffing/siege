@@ -12,6 +12,10 @@ export default class InputManager {
       m: Phaser.KeyCode.M,
       j: Phaser.KeyCode.J,
       h: Phaser.KeyCode.H,
+      y: Phaser.KeyCode.Y,
+      u: Phaser.KeyCode.U,
+      i: Phaser.KeyCode.I,
+      o: Phaser.KeyCode.O,
     })
   }
 
@@ -61,6 +65,22 @@ export default class InputManager {
 
     if (this._justPressed('j')) {
       castle.spawnArcher(true)
+    }
+
+    if (this._justPressed('y')) {
+      castle.spawnCatapult()
+    }
+
+    if (this._justPressed('u')) {
+      castle.spawnCatapult(true)
+    }
+
+    if (this._justPressed('i')) {
+      castle.spawnSling()
+    }
+
+    if (this._justPressed('o')) {
+      castle.spawnSling(true)
     }
   }
 

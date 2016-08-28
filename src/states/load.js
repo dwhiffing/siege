@@ -6,6 +6,8 @@ export default {
     this.load.spritesheet('units', 'assets/images/units.png', 15, 30)
     this.load.spritesheet('soldier', 'assets/images/soldier.png', 8, 15)
     this.load.spritesheet('archer', 'assets/images/archer.png', 11, 13)
+    this.load.spritesheet('explosion', 'assets/images/explosion.png', 128, 128)
+    this.load.spritesheet('catapult', 'assets/images/catapult.png', 22, 13)
     this.load.image('cursor', 'assets/images/cursor.png')
     this.load.image('castle', 'assets/images/castle.png')
     this.load.image('bullet', 'assets/images/bullet.png')

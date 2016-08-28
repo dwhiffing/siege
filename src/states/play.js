@@ -1,5 +1,6 @@
 import Board from '../entities/board'
 import Input from '../entities/input'
+import BlastManager from '../entities/blastManager'
 import Castle from '../entities/castle'
 import Cursor from '../sprites/cursor'
 import Ground from '../sprites/ground'
@@ -15,6 +16,7 @@ export default {
     this.game.ground = new Ground(game, 0, 680)
     this.game.castle = new Castle(game, -100, 530, '1')
     this.game.castle2 = new Castle(game, 1280, 530, '2')
+    this.game.blasts = new BlastManager(game)
   },
 
   update() {
