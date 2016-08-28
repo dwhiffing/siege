@@ -58,51 +58,51 @@ export default class InputManager {
     }
 
     if (this._justPressed('e')) {
-      castle.spawnSoldier()
+      castle.spawn('soldiers')
     }
 
     if (this._justPressed('r')) {
-      castle.spawnSoldier(true)
+      castle.spawn('soldiers', true)
     }
 
     if (this._justPressed('d')) {
-      castle.spawnKnight()
+      castle.spawn('knights')
     }
 
     if (this._justPressed('f')) {
-      castle.spawnKnight(true)
+      castle.spawn('knights', true)
     }
 
     if (this._justPressed('c')) {
-      castle.spawnElephant()
+      castle.spawn('elephants')
     }
 
     if (this._justPressed('v')) {
-      castle.spawnElephant(true)
+      castle.spawn('elephants', true)
     }
 
     if (this._justPressed('t')) {
-      castle.spawnSling()
+      castle.spawn('slings')
     }
 
     if (this._justPressed('y')) {
-      castle.spawnSling(true)
+      castle.spawn('slings', true)
     }
 
     if (this._justPressed('g')) {
-      castle.spawnArcher()
+      castle.spawn('archers')
     }
 
     if (this._justPressed('h')) {
-      castle.spawnArcher(true)
+      castle.spawn('archers', true)
     }
 
     if (this._justPressed('b')) {
-      castle.spawnCatapult()
+      castle.spawn('catapults')
     }
 
     if (this._justPressed('n')) {
-      castle.spawnCatapult(true)
+      castle.spawn('catapults', true)
     }
   }
 

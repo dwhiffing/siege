@@ -61,30 +61,6 @@ export default class Castle {
     thing.reset(x, 680, otherSide ? -1 : 1)
   }
 
-  spawnSoldier(otherSide) {
-    this.spawn('soldiers', otherSide)
-  }
-
-  spawnKnight(otherSide) {
-    this.spawn('knights', otherSide)
-  }
-
-  spawnElephant(otherSide) {
-    this.spawn('elephants', otherSide)
-  }
-
-  spawnSling(otherSide) {
-    this.spawn('slings', otherSide)
-  }
-
-  spawnArcher(otherSide) {
-    this.spawn('archers', otherSide)
-  }
-
-  spawnCatapult(otherSide) {
-    this.spawn('catapults', otherSide)
-  }
-
   damage(amount) {
     this.sprite.damage(amount)
     if (this.sprite.health <= 0) {
