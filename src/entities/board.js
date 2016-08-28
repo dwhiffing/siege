@@ -24,6 +24,13 @@ export default class Board {
     this.swapSound = game.add.audio('swap')
     this.submitSound = game.add.audio('submit')
     this.submitFailedSound = game.add.audio('submit_failed')
+    const style = { boundsAlignH: "center", boundsAlignV: "center", font: '18pt Arial', fill: '#ffffff' }
+    this.spawnText1 = game.add.text(20, 430, '', style)
+    this.spawnText1.setTextBounds(0, 10, 150, 50)
+    this.spawnText2 = game.add.text(180, 430, '', style)
+    this.spawnText2.setTextBounds(0, 10, 150, 50)
+    this.spawnText3 = game.add.text(350, 430, '', style)
+    this.spawnText3.setTextBounds(0, 10, 150, 50)
 
     for (let x = _x; x < NUM_COLUMNS+_x; x++) {
       for (let y = _y; y < NUM_ROWS+_y; y++) {
@@ -53,6 +60,21 @@ export default class Board {
 
   checkForMatches() {
     let matches = this._getMatches()
+    this.spawnText1.text = ''
+    this.spawnText2.text = ''
+    this.spawnText3.text = ''
+    let spawns = matches.forEach(match => {
+      let spawn = match.spawn
+      if (match.type.shape[0] === 0) {
+        this.spawnText1.text = spawn
+      }
+      if (match.type.shape[0] === 2) {
+        this.spawnText2.text = spawn
+      }
+      if (match.type.shape[0] === 4) {
+        this.spawnText3.text = spawn
+      }
+    })
     this.applyHighlights(matches)
   }
 
@@ -64,11 +86,8 @@ export default class Board {
       this.submitFailedSound.play()
     }
     matches.forEach(match => {
-      const tileType = match.tiles[0].frame
-      const matchType = match.type.index
-      if (tileType < 2) {
-        const unit = UNIT_TYPES[matchType * 4 + tileType]
-        this.game.castle.spawn(unit+'s')
+      if (match.spawn) {
+        this.game.castle.spawn(match.spawn+'s')
       }
       match.tiles.forEach((tile) => tile.kill())
     })
@@ -151,7 +170,8 @@ export default class Board {
       const tiles = this._getRectOfTiles(...shape)
       const frames = tiles.map(t => t.frame)
       let type
-      MATCH_TYPES.forEach((base, index) => {
+      let spawn
+      MATCH_TYPES.forEach((base, ind) => {
         if (base.length !== frames.length) {
           return false
         }
@@ -161,13 +181,15 @@ export default class Board {
             if (i !== j) {
               let shapeVariation = base.map(index => index === 0 ? i : j)
               if (arraysEqual(shapeVariation, frames)) {
-                type = { index: Math.floor(index/3), base, shape }
+                const index = Math.floor(ind/3)
+                spawn = UNIT_TYPES[index * 4 + frames[0]]
+                type = { index, base, shape }
               }
             }
           }
         }
       })
-      return type ? { tiles, type } : null
+      return type ? { tiles, type, spawn } : null
     }).filter(n => !!n)
   }
 
