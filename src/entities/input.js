@@ -48,11 +48,11 @@ export default class InputManager {
     }
 
     if (this._justPressed('n')) {
-      castle.spawnUnit()
+      castle.spawnSoldier()
     }
 
     if (this._justPressed('m')) {
-      castle.spawnUnit(true)
+      castle.spawnSoldier(true)
     }
 
     if (this._justPressed('h')) {

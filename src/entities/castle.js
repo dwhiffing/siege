@@ -1,15 +1,15 @@
-import Unit from '../sprites/unit'
+import Soldier from '../sprites/soldier'
 import Archer from '../sprites/archer'
 
 export default class Castle {
   constructor(game, x, y, name) {
     this.game = game
 
-    this.units = game.add.group(undefined, 'units', false, true)
-    this.units.classType = Unit
-    this.units.createMultiple(30, 'soldier')
+    this.soldiers = game.add.group(undefined, 'soldiers', false, true)
+    this.soldiers.classType = Soldier
+    this.soldiers.createMultiple(30, 'soldier')
 
-    this.archers = game.add.group(undefined, 'units', false, true)
+    this.archers = game.add.group(undefined, 'archers', false, true)
     this.archers.classType = Archer
     this.archers.createMultiple(30, 'archer')
 
@@ -21,9 +21,9 @@ export default class Castle {
   }
 
   update() {
-    this.units.callAll('update')
+    this.soldiers.callAll('update')
     this.game.physics.arcade.overlap(
-      this.units, this.units,
+      this.soldiers, this.soldiers,
       (one, two) => {
         one.overlap(two)
         two.overlap(one)
@@ -32,17 +32,17 @@ export default class Castle {
   }
 
   render() {
-    this.units.callAll('render')
+    this.soldiers.callAll('render')
   }
 
   spawn(type, otherSide) {
     let thing = this[type].getFirstDead()
     const x = otherSide ? 1290 : 30
-    thing.reset(x, 680, 0, otherSide ? -1 : 1)
+    thing.reset(x, 680, otherSide ? -1 : 1)
   }
 
-  spawnUnit(otherSide) {
-    this.spawn('units', otherSide)
+  spawnSoldier(otherSide) {
+    this.spawn('soldiers', otherSide)
   }
 
   spawnArcher(otherSide) {
