@@ -21,15 +21,15 @@ export default class Castle {
     this.elephants.classType = Elephant
     this.elephants.createMultiple(30, 'soldier')
 
-    this.archers = game.add.group(undefined, 'archers', false, true)
+    this.archers = game.add.group(undefined, 'archers')
     this.archers.classType = Archer
     this.archers.createMultiple(30, 'archer')
 
-    this.slings = game.add.group(undefined, 'slings', false, true)
+    this.slings = game.add.group(undefined, 'slings')
     this.slings.classType = Sling
     this.slings.createMultiple(30, 'archer')
 
-    this.catapults = game.add.group(undefined, 'catapults', false, true)
+    this.catapults = game.add.group(undefined, 'catapults')
     this.catapults.classType = Catapult
     this.catapults.createMultiple(30, 'catapult')
 
@@ -41,24 +41,34 @@ export default class Castle {
   }
 
   update() {
+    const overlap = (one, two) => { one.overlap(two); two.overlap(one) }
     this.soldiers.callAll('update')
-    this.game.physics.arcade.overlap(
-      this.soldiers, this.soldiers,
-      (one, two) => {
-        one.overlap(two)
-        two.overlap(one)
-      }, null, this
-    )
+    this.game.physics.arcade.overlap(this.soldiers, this.knights, overlap, null, this)
+    this.game.physics.arcade.overlap(this.soldiers, this.elephants, overlap, null, this)
+    this.game.physics.arcade.overlap(this.soldiers, this.soldiers, overlap, null, this)
+    this.game.physics.arcade.overlap(this.knights, this.soliders, overlap, null, this)
+    this.game.physics.arcade.overlap(this.knights, this.elephants, overlap, null, this)
+    this.game.physics.arcade.overlap(this.knights, this.knights, overlap, null, this)
+    this.game.physics.arcade.overlap(this.elephants, this.soliders, overlap, null, this)
+    this.game.physics.arcade.overlap(this.elephants, this.knights, overlap, null, this)
+    this.game.physics.arcade.overlap(this.elephants, this.elephants, overlap, null, this)
   }
 
   render() {
     this.soldiers.callAll('render')
+    this.elephants.callAll('render')
+    this.knights.callAll('render')
   }
 
   spawn(type, otherSide) {
-    let thing = this[type].getFirstDead()
-    const x = otherSide ? 1290 : 30
-    thing.reset(x, 680, otherSide ? -1 : 1)
+    let group = this[type]
+    if (group) {
+      let thing = group.getFirstDead()
+      const x = otherSide ? 1290 : 30
+      thing.reset(x, 680, otherSide ? -1 : 1)
+    } else {
+      console.warn(`tried to spawn ${type}, which doesnt exist`)
+    }
   }
 
   damage(amount) {

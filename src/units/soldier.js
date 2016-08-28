@@ -1,11 +1,21 @@
 import Melee from '../sprites/melee'
 
-const MIN_SPEED = 100 // 10
-const MAX_SPEED = 120 // 30
-
 export default class Soldier extends Melee {
+  constructor(game, x, y, key) {
+    const opts = {
+      baseDamage: 4,
+      baseHealth: 30,
+      baseSpeed: 40,
+      speedVariation: 20,
+      healthVariation: 10,
+      damageVariation: 2,
+    }
+    super(game, x, y, key, opts)
+  }
+
   reset(x, y, direction) {
-    this.speed = this.game.rnd.integerInRange(MIN_SPEED,MAX_SPEED) * direction
+    this.sizeX = 10
+    this.sizeY = 15
     super.reset(x, y, direction)
   }
 }

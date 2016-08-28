@@ -1,5 +1,6 @@
 import Board from '../entities/board'
 import Input from '../entities/input'
+import AI from '../entities/ai'
 import BlastManager from '../entities/blastManager'
 import Castle from '../entities/castle'
 import Cursor from '../sprites/cursor'
@@ -17,12 +18,14 @@ export default {
     this.game.castle = new Castle(game, -100, 530, '1')
     this.game.castle2 = new Castle(game, 1280, 530, '2')
     this.game.blasts = new BlastManager(game)
+    this.game.ai = new AI(game)
     this.game.board.checkForMatches()
   },
 
   update() {
     this.game.inputManager.update()
     this.game.castle.update()
+    this.game.ai.update()
   },
 
   render() {

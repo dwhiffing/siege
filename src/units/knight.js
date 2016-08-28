@@ -1,11 +1,21 @@
 import Melee from '../sprites/melee'
 
-const MIN_SPEED = 200 // 10
-const MAX_SPEED = 300 // 30
-
 export default class Knight extends Melee {
+  constructor(game, x, y, key) {
+    const opts = {
+      baseDamage: 2,
+      baseHealth: 5,
+      baseSpeed: 300,
+      speedVariation: 100,
+      healthVariation: 5,
+      damageVariation: 2,
+    }
+    super(game, x, y, key, opts)
+  }
+
   reset(x, y, direction) {
-    this.speed = this.game.rnd.integerInRange(MIN_SPEED,MAX_SPEED) * direction
+    this.sizeX = 10
+    this.sizeY = 15
     super.reset(x, y, direction)
     this.scale.set(4 * direction, 4)
   }

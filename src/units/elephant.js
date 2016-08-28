@@ -1,11 +1,21 @@
 import Melee from '../sprites/melee'
 
-const MIN_SPEED = 100 // 10
-const MAX_SPEED = 100 // 30
-
 export default class Elephant extends Melee {
+  constructor(game, x, y, key) {
+    const opts = {
+      baseDamage: 20,
+      baseHealth: 100,
+      baseSpeed: 30,
+      speedVariation: 5,
+      healthVariation: 10,
+      damageVariation: 2,
+    }
+    super(game, x, y, key, opts)
+  }
+
   reset(x, y, direction) {
-    this.speed = this.game.rnd.integerInRange(MIN_SPEED,MAX_SPEED) * direction
+    this.sizeX = 10
+    this.sizeY = 15
     super.reset(x, y, direction)
     this.scale.set(6 * direction, 6)
   }

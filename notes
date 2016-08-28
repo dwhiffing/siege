@@ -1,49 +1,48 @@
-Units
-  types:
+Unit types:
+   melee: damage enemy base
+    solider
+      all around
+    knight
+      fast, not much health
+    elephant
+      slow, lots of health
 
-     melee: damage enemy base
-      solider
-        all around
-      knight
-        fast, not much health
-      elephant
-        slow, lots of health
+   ranged: do not damage enemy base
+    sling
+      fires up to 5 at once with spread, short range
+    archer
+      fires up to 10 in rapid succession, long range
+    catapult
+      fires one with explosion, medium range
 
-     ranged: do not damage enemy base
-      sling
-        fires up to 5 at once with spread, short range
-      archer
-        fires up to 10 in rapid succession, long range
-      catapult
-        fires one with explosion, medium range
+  flying: do not damage enemy base
+    airman
+      fires arrows straight forward, no damage to enemy base
+    airship
+      drops 10-20 arrows
+    zeplin
+      drops 1-3 explosives
 
-      flying: do not damage enemy base
-        airman
-          fires arrows straight forward, no damage to enemy base
-        airship
-          drops 10-20 arrows
-        zeplin
-          drops 1-3 explosives
+  special: just protect your base
+    patch
+      takes 5-20 damage before dying
+    wall
+      stays for 3-10 seconds, blocks all damage
+    repair
+      recovers 5-20hp over 5-20 seconds
 
-      special: just protect your base
-        patch
-          takes 5-20 damage before dying
-        wall
-          stays for 3-10 seconds, blocks all damage
-        repair
-          recovers 5-20hp over 5-20 seconds
+Patterns
+  striped: 0: soldier, 1: sling, 2: airman, 3: patch
+    X- X-X- X-X-X-
+    X- X-X- X-X-X-
 
-  striped
-    01 0101 010101
-    01 0101 010101
+  checker: 0: knight, 1: archer, 2: airship, 3: wall
+    X- X-X- X-X-X-
+    -X -X-X -X-X-X
 
-  checker
-    01 0101 010101
-    10 1010 101010
-
-  wrapped
-    11 1111 111111
-    00 0000 000000
+  wrapped: 0: elephant, 1: catapult, 2: zeplin, 3: repair
+    XX XXXX XXXXXX
+    -- ---- ------
 
   pattern determines what unit you get
   size determines power/quantity of that unit
@@ -53,16 +52,13 @@ checklist
     melee units -
     ranged units -
     explosions -
-    ai sends units
-    screen shake on castle damage
+    ai sends units -
+    make explosions do damage
   basic graphics
-    tiles
     tile background
     life and score ui
     background
     foreground
-    melee units
-    ranged units
   basic sound
     footsteps
     attacks
@@ -74,10 +70,13 @@ checklist
     submit match
 
   extra gameplay
+    melee units
+    ranged units
     flying units
     special units
     ai 3 difficulty levels
     ai shuffles blocks around randomly to make it look like its playing
+    screen shake on castle damage
   extra graphics
     title card
     flying units
@@ -86,3 +85,19 @@ checklist
     background music
     title music
     game over music
+
+need instructions
+  explain the three patterns
+    stacked: small
+    striped: medium
+    checker: large
+  explain that larger patterns give more of the same thing
+  add ui to castle that shows what submitting will produce
+
+
+balancing
+  small units should produce 2 with single match, 6 with double match, and 10 with triple match
+  medium units should produce 1 with single match, 3 with double match, and 5 with triple match
+  medium units should produce 1 with single match, 2 with double match, and 3 with triple match
+
+should make large units slightly smaller

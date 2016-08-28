@@ -8,17 +8,25 @@ const ANIMATIONS = {
   attack: [[0, 3, 4], 5],
 }
 
-export default class Soldier extends Unit {
-  constructor(game, x, y, key, frame) {
-    super(game, x, y, key, frame)
-    this.sizeX = 10
-    this.sizeY = 15
+export default class Melee extends Unit {
+  constructor(game, x, y, key, { baseDamage=1, baseHealth=10, baseSpeed=100, speedVariation=20, healthVariation=20, damageVariation=5 }) {
+    super(game, x, y, key)
+    this.baseDamage = baseDamage
+    this.baseHealth = baseHealth
+    this.baseSpeed = baseSpeed
+    this.speedVariation = speedVariation
+    this.healthVariation = healthVariation
+    this.damageVariation = damageVariation
     this.addAnimations(ANIMATIONS)
   }
 
   reset(x, y, direction) {
     super.reset(x, y, direction)
     this.animations.play('walk')
+    this.maxHealth = this.baseHealth + this.game.rnd.integerInRange(-this.healthVariation, this.healthVariation)
+    this.heal(this.maxHealth)
+    this.speed = (this.baseSpeed + this.game.rnd.integerInRange(-this.speedVariation, this.speedVariation)) * direction
+    this.damageAmount = this.baseDamage + this.game.rnd.integerInRange(-this.damageVariation, this.damageVariation)
     this.body.setSize(this.sizeX, this.sizeY, direction === 1 ? 0 : -5, 0)
     this.body.velocity.x = this.speed
   }
@@ -31,9 +39,9 @@ export default class Soldier extends Unit {
 
     if (this.x > 1400 || this.x < -40) {
       if (this.x > 1400) {
-        this.game.castle2.damage(20)
+        this.game.castle2.damage(this.damageAmount)
       } else {
-        this.game.castle.damage(20)
+        this.game.castle.damage(this.damageAmount)
       }
       this.kill()
     }
@@ -65,13 +73,15 @@ export default class Soldier extends Unit {
       }
     } else {
       if (this.direction === 1 && this.x < soldier.x || this.direction === -1 && this.x > soldier.x) {
-        this.stop()
+        if (soldier.isAttacking) {
+          this.stop()
+        }
       }
     }
   }
 
-  hit() {
-    this.damage(2)
+  hit(damage) {
+    this.damage(damage)
     return this.game.add.tween(this).to({
         alpha: 0.8,
       },
@@ -98,7 +108,7 @@ export default class Soldier extends Unit {
       0,
       true
     )
-    tween.onRepeat.addOnce(soldier.hit.bind(soldier))
+    tween.onRepeat.addOnce(soldier.hit.bind(soldier, this.damageAmount))
     tween.onComplete.add(() => setTimeout(() => this.isAttacking = false, 300))
   }
 }
