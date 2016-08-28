@@ -1,3 +1,12 @@
+const spawns = {
+  melee: {
+    one: 'soldiers', two: 'knights', three: 'elephants',
+  },
+  ranged: {
+    one: 'slings', two: 'archers', three: 'catapults',
+  },
+}
+
 export default class InputManager {
   constructor(game) {
     this.game = game
@@ -9,19 +18,15 @@ export default class InputManager {
       space: Phaser.KeyCode.SPACEBAR,
       z: Phaser.KeyCode.Z,
 
-      e: Phaser.KeyCode.E,
-      r: Phaser.KeyCode.R,
-      d: Phaser.KeyCode.D,
-      f: Phaser.KeyCode.F,
-      c: Phaser.KeyCode.C,
-      v: Phaser.KeyCode.V,
+      u: Phaser.KeyCode.U,
+      i: Phaser.KeyCode.I,
+      o: Phaser.KeyCode.O,
+      p: Phaser.KeyCode.P,
 
-      t: Phaser.KeyCode.T,
-      y: Phaser.KeyCode.Y,
-      g: Phaser.KeyCode.G,
-      h: Phaser.KeyCode.H,
-      b: Phaser.KeyCode.B,
-      n: Phaser.KeyCode.N,
+      shift: Phaser.KeyCode.SHIFT,
+      one: Phaser.KeyCode.ONE,
+      two: Phaser.KeyCode.TWO,
+      three: Phaser.KeyCode.THREE,
     })
   }
 
@@ -57,52 +62,24 @@ export default class InputManager {
       board.submitMatches()
     }
 
-    if (this._justPressed('e')) {
-      castle.spawn('soldiers')
+    if (this._justPressed('u')) {
+      let spawn = this._spawnThing(spawns.melee)
+      castle.spawn(spawn, this.keys['shift'].isDown)
     }
 
-    if (this._justPressed('r')) {
-      castle.spawn('soldiers', true)
+    if (this._justPressed('i')) {
+      let spawn = this._spawnThing(spawns.ranged)
+      castle.spawn(spawn, this.keys['shift'].isDown)
     }
+  }
 
-    if (this._justPressed('d')) {
-      castle.spawn('knights')
-    }
-
-    if (this._justPressed('f')) {
-      castle.spawn('knights', true)
-    }
-
-    if (this._justPressed('c')) {
-      castle.spawn('elephants')
-    }
-
-    if (this._justPressed('v')) {
-      castle.spawn('elephants', true)
-    }
-
-    if (this._justPressed('t')) {
-      castle.spawn('slings')
-    }
-
-    if (this._justPressed('y')) {
-      castle.spawn('slings', true)
-    }
-
-    if (this._justPressed('g')) {
-      castle.spawn('archers')
-    }
-
-    if (this._justPressed('h')) {
-      castle.spawn('archers', true)
-    }
-
-    if (this._justPressed('b')) {
-      castle.spawn('catapults')
-    }
-
-    if (this._justPressed('n')) {
-      castle.spawn('catapults', true)
+  _spawnThing(spawns) {
+    if (this.keys['two'].isDown) {
+      return spawns.two
+    } else if (this.keys['three'].isDown) {
+      return spawns.three
+    } else {
+      return spawns.one
     }
   }
 
