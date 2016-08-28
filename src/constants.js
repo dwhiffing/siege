@@ -1,4 +1,4 @@
-export const OFFSET_X = 20
+export const OFFSET_X = 25
 export const OFFSET_Y = 20
 export const TWEEN_DURATION = 400
 export const TILE_DIMENSIONS = 75

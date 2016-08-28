@@ -14,6 +14,8 @@ import {
 export default class Board {
   constructor(game, _x=0, _y=0) {
     this.game = game
+
+    this.bg = game.add.group()
     this.tiles = game.add.group()
     this.tiles.classType = Tile
     this.overlays = game.add.group()
@@ -32,9 +34,12 @@ export default class Board {
     this.spawnText3 = game.add.text(350, 430, '', style)
     this.spawnText3.setTextBounds(0, 10, 150, 50)
 
+    let [bgX, bgY] = getBoardPosition(_x, _y)
+    this.bg.create(bgX - 25, bgY - 20, 'tilebg')
     for (let x = _x; x < NUM_COLUMNS+_x; x++) {
       for (let y = _y; y < NUM_ROWS+_y; y++) {
         let tile = this.tiles.create(x, y, 'tiles')
+        tile.bringToTop()
         if (y >= NUM_ROWS-2) {
           let overlay = this.overlays.create(x, y, 'overlay')
         }

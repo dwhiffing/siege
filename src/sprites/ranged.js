@@ -50,7 +50,7 @@ export default class Ranged extends Unit {
 
   update() {
     this.game.physics.arcade.overlap(
-      this.bullets, this.game.ground.sprite,
+      this.bullets, this.game.ground,
       (one, two) => {
         if (one.explode) {
           one.explode()

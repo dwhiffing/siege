@@ -49,25 +49,12 @@ Patterns
 
 checklist
   basic gameplay
-    melee units -
-    ranged units -
-    explosions -
-    ai sends units -
     make explosions do damage
   basic graphics
     tile background
     life and score ui
     background
     foreground
-  basic sound
-    footsteps
-    attacks
-    damage castle
-    select
-    swap
-    game over sound
-    critical life sound
-    submit match
 
   extra gameplay
     melee units

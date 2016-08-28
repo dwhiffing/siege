@@ -13,8 +13,10 @@ export default {
     this.load.image('cursor', 'assets/images/cursor.png')
     this.load.image('overlay', 'assets/images/overlay.png')
     this.load.image('castle', 'assets/images/castle.png')
+    this.load.image('tilebg', 'assets/images/tilebg.png')
     this.load.image('bullet', 'assets/images/bullet.png')
     this.load.image('ground', 'assets/images/ground.png')
+    this.load.image('sky', 'assets/images/sky.jpg')
 
     this.load.audio('big_crash_1','assets/audio/big_crash_1.mp3')
     this.load.audio('big_crash_2','assets/audio/big_crash_2.mp3')
