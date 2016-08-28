@@ -37,6 +37,8 @@ export default class Castle {
     this.sprite.health = 100
     this.name = name
 
+    this.submitSound = this.game.add.audio('swap2')
+
     this.healthText = game.add.text(this.name === '1' ? x+100 : x, y, '100')
   }
 
@@ -61,6 +63,7 @@ export default class Castle {
   }
 
   spawn(type, otherSide) {
+    this.submitSound.play()
     let group = this[type]
     if (group) {
       let thing = group.getFirstDead()

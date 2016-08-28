@@ -7,6 +7,14 @@ const MIN_SHOT_VELOCITY_Y = -100
 const MAX_SHOT_VELOCITY_Y = -150
 
 export default class Sling extends Ranged {
+  constructor(game, x, y, key) {
+    const opts = {
+      boomSound: 'small_crash_2',
+      boomVolume: 0.1,
+    }
+    super(game, x, y, key, opts)
+  }
+
   reset(x, y, direction) {
     super.reset(x, y, direction)
     this.shoot()

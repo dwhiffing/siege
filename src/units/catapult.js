@@ -8,6 +8,13 @@ const MIN_SHOT_VELOCITY_Y = -150
 const MAX_SHOT_VELOCITY_Y = -200
 
 export default class Catapult extends Ranged {
+  constructor(game, x, y, key) {
+    const opts = {
+      boomSound: 'medium_crash_2',
+    }
+    super(game, x, y, key, opts)
+  }
+
   reset(x, y, direction) {
     super.reset(x, y, direction)
     this.shoot()

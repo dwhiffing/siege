@@ -7,6 +7,13 @@ const MIN_SHOT_VELOCITY_Y = -150
 const MAX_SHOT_VELOCITY_Y = -200
 
 export default class Archer extends Ranged {
+  constructor(game, x, y, key) {
+    const opts = {
+      boomSound: 'small_crash_3',
+    }
+    super(game, x, y, key, opts)
+  }
+
   reset(x, y, direction) {
     super.reset(x, y, direction)
     this.shoot()

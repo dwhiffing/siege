@@ -4,6 +4,8 @@ export default class Knight extends Melee {
   constructor(game, x, y, key) {
     const opts = {
       baseDamage: 2,
+      attackSound: 'medium_crash_7',
+      attackVolume: 0.7,
       baseHealth: 5,
       baseSpeed: 300,
       speedVariation: 100,

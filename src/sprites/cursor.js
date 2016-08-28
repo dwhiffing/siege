@@ -11,6 +11,7 @@ export default class Cursor {
     this.mark = game.add.sprite(20, 20, 'cursor')
     this.mark.tint = 0x00ffff
     this.mark.alpha = 0
+    this.stepSound = game.add.audio('footstep')
   }
 
   moveTo(target, x=target.x, y=target.y) {
@@ -33,12 +34,14 @@ export default class Cursor {
   }
 
   deselect(x, y) {
+    this.stepSound.play()
     this.moveTo(this.mark, -1, -1)
     this.selected = null
     this.mark.alpha = 0
   }
 
   select(x, y) {
+    this.stepSound.play()
     if (!this.checkOutOfBounds(x, y)) {
       this.moveTo(this.mark, this.x, this.y)
       this.selected = { x: this.x, y: this.y }

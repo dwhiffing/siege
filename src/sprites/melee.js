@@ -9,7 +9,7 @@ const ANIMATIONS = {
 }
 
 export default class Melee extends Unit {
-  constructor(game, x, y, key, { baseDamage=1, baseHealth=10, baseSpeed=100, speedVariation=20, healthVariation=20, damageVariation=5 }) {
+  constructor(game, x, y, key, { baseDamage=1, baseHealth=10, baseSpeed=100, speedVariation=20, healthVariation=20, damageVariation=5, attackSound="swipe", attackVolume=1 }) {
     super(game, x, y, key)
     this.baseDamage = baseDamage
     this.baseHealth = baseHealth
@@ -17,6 +17,8 @@ export default class Melee extends Unit {
     this.speedVariation = speedVariation
     this.healthVariation = healthVariation
     this.damageVariation = damageVariation
+    this.attackSound = game.add.audio(attackSound)
+    this.attackSound.volume = attackVolume
     this.addAnimations(ANIMATIONS)
   }
 
@@ -96,6 +98,7 @@ export default class Melee extends Unit {
 
   attack(soldier) {
     this.animations.play('attack')
+    this.attackSound.play()
     this.isAttacking = true
     const tween = this.game.add.tween(this)
     tween.to({
