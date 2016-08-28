@@ -16,7 +16,7 @@ export default class InputManager {
   }
 
   update() {
-    const { cursor, board, spawner } = this.game
+    const { cursor, board, castle } = this.game
 
     if (this._justPressed('up')) {
       cursor.move('y', -1)
@@ -48,19 +48,19 @@ export default class InputManager {
     }
 
     if (this._justPressed('n')) {
-      spawner.spawnUnit()
+      castle.spawnUnit()
     }
 
     if (this._justPressed('m')) {
-      spawner.spawnUnit(true)
+      castle.spawnUnit(true)
     }
 
     if (this._justPressed('h')) {
-      spawner.spawnArcher()
+      castle.spawnArcher()
     }
 
     if (this._justPressed('j')) {
-      spawner.spawnArcher(true)
+      castle.spawnArcher(true)
     }
   }
 

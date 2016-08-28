@@ -1,4 +1,4 @@
-import Tile from './tile'
+import Tile from '../sprites/tile'
 import { arraysEqual, getBoardPosition, getBoardId } from '../utils'
 import {
   TWEEN_DURATION,
@@ -33,7 +33,7 @@ export default class Board {
   checkForMatches() {
     let matches = this._getMatches()
     matches.forEach(tiles => {
-      this.game.spawner.spawnUnit()
+      this.game.castle.spawnUnit()
       tiles.forEach((tile) => tile.kill())
     })
 

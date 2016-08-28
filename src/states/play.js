@@ -1,9 +1,8 @@
 import Board from '../entities/board'
-import Cursor from '../entities/cursor'
 import Input from '../entities/input'
-import Spawner from '../entities/spawner'
 import Castle from '../entities/castle'
-import Ground from '../entities/ground'
+import Cursor from '../sprites/cursor'
+import Ground from '../sprites/ground'
 
 export default {
   create(game) {
@@ -13,7 +12,6 @@ export default {
     this.game.board2 = new Board(game, 10, 0)
     this.game.cursor = new Cursor(game)
     this.game.inputManager = new Input(game)
-    this.game.spawner = new Spawner(game)
     this.game.ground = new Ground(game, 0, 680)
     this.game.castle = new Castle(game, -100, 530, '1')
     this.game.castle2 = new Castle(game, 1280, 530, '2')
@@ -21,10 +19,10 @@ export default {
 
   update() {
     this.game.inputManager.update()
-    this.game.spawner.update()
+    this.game.castle.update()
   },
 
   render() {
-    this.game.spawner.render()
+    this.game.castle.render()
   }
 }

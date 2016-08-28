@@ -1,7 +1,7 @@
 Units
   types:
 
-     melee:
+     melee: damage enemy base
       solider
         all around
       knight
@@ -9,15 +9,15 @@ Units
       elephant
         slow, lots of health
 
-     ranged:
+     ranged: do not damage enemy base
       sling
-        fires up to 5 at once with spread
+        fires up to 5 at once with spread, short range
       archer
-        fires up to 10 in rapid succession
+        fires up to 10 in rapid succession, long range
       catapult
-        fires one with explosion
+        fires one with explosion, medium range
 
-      flying:
+      flying: do not damage enemy base
         airman
           fires arrows straight forward, no damage to enemy base
         airship
@@ -25,7 +25,7 @@ Units
         zeplin
           drops 1-3 explosives
 
-      special:
+      special: just protect your base
         patch
           takes 5-20 damage before dying
         wall
@@ -45,7 +45,50 @@ Units
     11 1111 111111
     00 0000 000000
 
+  pattern determines what unit you get
+  size determines power/quantity of that unit
+
   iron/melee
   wood/ranged
   air/flying
   fire/magic
+
+
+checklist
+  basic gameplay
+    melee units
+    ranged units
+    explosions
+    ai sends units
+    screen shake on castle damage
+  basic graphics
+    tiles
+    tile background
+    life and score ui
+    background
+    foreground
+    melee units
+    ranged units
+  basic sound
+    footsteps
+    attacks
+    damage castle
+    select
+    swap
+    game over sound
+    critical life sound
+    submit match
+
+  extra gameplay
+    flying units
+    special units
+    ai 3 difficulty levels
+    ai shuffles blocks around randomly to make it look like its playing
+  extra graphics
+    title card
+    flying units
+    special units
+  extra sound
+    background music
+    title music
+    game over music
