@@ -50,11 +50,6 @@ Patterns
 checklist
   basic gameplay
     make explosions do damage
-  basic graphics
-    tile background
-    life and score ui
-    background
-    foreground
 
   extra gameplay
     melee units

@@ -31,7 +31,7 @@ export default class InputManager {
   }
 
   update() {
-    const { cursor, board, castle } = this.game
+    const { cursor, board, spawner } = this.game
 
     if (this._justPressed('up')) {
       cursor.move('y', -1)
@@ -64,12 +64,12 @@ export default class InputManager {
 
     if (this._justPressed('u')) {
       let spawn = this._spawnThing(spawns.melee)
-      castle.spawn(spawn, this.keys['shift'].isDown)
+      spawner.spawn(spawn, this.keys['shift'].isDown)
     }
 
     if (this._justPressed('i')) {
       let spawn = this._spawnThing(spawns.ranged)
-      castle.spawn(spawn, this.keys['shift'].isDown)
+      spawner.spawn(spawn, this.keys['shift'].isDown)
     }
   }
 

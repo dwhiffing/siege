@@ -9,11 +9,12 @@ const ANIMATIONS = {
 }
 
 export default class Melee extends Unit {
-  constructor(game, x, y, key, { baseDamage=1, baseHealth=10, baseSpeed=100, speedVariation=20, healthVariation=20, damageVariation=5, attackSound="swipe", attackVolume=1 }) {
+  constructor(game, x, y, key, { baseDamage=1, baseHealth=10, baseSpeed=100, speedVariation=20, healthVariation=20, damageVariation=5, attackSound="swipe", attackVolume=1, amount=1 }) {
     super(game, x, y, key)
     this.baseDamage = baseDamage
     this.baseHealth = baseHealth
     this.baseSpeed = baseSpeed
+    this.amount = amount
     this.speedVariation = speedVariation
     this.healthVariation = healthVariation
     this.damageVariation = damageVariation
@@ -66,38 +67,46 @@ export default class Melee extends Unit {
     }
   }
 
-  overlap(soldier) {
+  overlap(unit) {
     this.hasOverlapped = true
-    if (soldier.direction !== this.direction) {
+    if (unit.direction !== this.direction) {
       this.stop()
       if (!this.isAttacking) {
-        this.attack(soldier)
+        this.attack(unit)
       }
     } else {
-      if (this.direction === 1 && this.x < soldier.x || this.direction === -1 && this.x > soldier.x) {
-        if (soldier.isAttacking) {
+      if (this.direction === 1 && this.x < unit.x || this.direction === -1 && this.x > unit.x) {
+        if (unit.isAttacking) {
           this.stop()
         }
       }
     }
   }
 
-  hit(damage) {
-    this.damage(damage)
+  hit(amount) {
+    this.damage(amount)
+    this.stop()
+    if (this.tweening) {
+      return
+    }
+    this.tweening = true
+    setTimeout(() => this.tweening = false, 500)
     return this.game.add.tween(this).to({
-        alpha: 0.8,
+        alpha: 0.2,
       },
-      100,
+      250,
       Phaser.Easing.Quadratic.InOut,
       true,
       0,
-      1,
+      0,
       true
     )
   }
 
   attack(soldier) {
-    this.animations.play('attack')
+    if (this.game.rnd.integerInRange(0,10) === 1) {
+      this.animations.play('attack')
+    }
     this.attackSound.play()
     this.isAttacking = true
     const tween = this.game.add.tween(this)

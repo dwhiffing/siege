@@ -3,14 +3,15 @@ import Melee from '../sprites/melee'
 export default class Soldier extends Melee {
   constructor(game, x, y, key) {
     const opts = {
-      baseDamage: 4,
+      baseDamage: 10,
       attackSound: 'small_crash_2',
-      attackVolume: 0.5,
-      baseHealth: 30,
-      baseSpeed: 40,
-      speedVariation: 20,
-      healthVariation: 10,
-      damageVariation: 2,
+      attackVolume: 0.2,
+      baseHealth: 80,
+      baseSpeed: 60,
+      amount: 6,
+      speedVariation: 15,
+      healthVariation: 50,
+      damageVariation: 5,
     }
     super(game, x, y, key, opts)
   }
@@ -19,5 +20,7 @@ export default class Soldier extends Melee {
     this.sizeX = 10
     this.sizeY = 15
     super.reset(x, y, direction)
+    const scaling = this.game.rnd.integerInRange(1,6)/10 + 2.5
+    this.scale.set(scaling * direction, scaling*0.9)
   }
 }

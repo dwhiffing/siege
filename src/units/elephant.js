@@ -5,11 +5,11 @@ export default class Elephant extends Melee {
     const opts = {
       baseDamage: 20,
       attackSound: 'medium_crash_1',
-      attackVolume: 0.5,
-      baseHealth: 100,
-      baseSpeed: 30,
+      attackVolume: 0.3,
+      baseHealth: 170,
+      baseSpeed: 20,
       speedVariation: 5,
-      healthVariation: 10,
+      healthVariation: 50,
       damageVariation: 2,
     }
     super(game, x, y, key, opts)
@@ -19,6 +19,6 @@ export default class Elephant extends Melee {
     this.sizeX = 10
     this.sizeY = 15
     super.reset(x, y, direction)
-    this.scale.set(6 * direction, 6)
+    this.scale.set(7 * direction, 7)
   }
 }

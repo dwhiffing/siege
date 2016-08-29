@@ -20,7 +20,7 @@ export default class Sling extends Ranged {
     this.shoot()
   }
 
-  shoot(numShots=6, size=1) {
+  shoot(numShots=10, size=1.2) {
     this.game.time.events.repeat(SHOT_TIME, numShots, () => {
       super.shoot(1, size, MIN_SHOT_VELOCITY_X, MAX_SHOT_VELOCITY_X, MIN_SHOT_VELOCITY_Y, MAX_SHOT_VELOCITY_Y, 0, 0)
     })

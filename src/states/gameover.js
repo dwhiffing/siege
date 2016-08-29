@@ -7,7 +7,6 @@ export default {
   create(game) {
     this.game = game
     game.stage.backgroundColor = '#000000'
-    const loser = 1
     this.titleText = game.add.text(this.game.world.centerX, this.game.world.centerY-50, `PLAYER ${loser} LOSES!`, { font: "bold 42px Arial", fill: "#fff" })
     this.titleText.anchor.setTo(0.5)
 

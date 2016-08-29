@@ -3,6 +3,7 @@ import Input from '../entities/input'
 import AI from '../entities/ai'
 import BlastManager from '../entities/blastManager'
 import Castle from '../entities/castle'
+import Spawner from '../entities/spawner'
 import Cursor from '../sprites/cursor'
 
 export default {
@@ -13,9 +14,10 @@ export default {
     game.ground = game.add.sprite(0, 680, 'ground')
     game.physics.arcade.enable(game.ground)
     game.board = new Board(game)
-    game.board2 = new Board(game, 10, 0)
+    // game.board2 = new Board(game, 10, 0)
     game.cursor = new Cursor(game)
     game.inputManager = new Input(game)
+    game.spawner = new Spawner(game)
     game.castle = new Castle(game, -100, 530, '1')
     game.castle2 = new Castle(game, 1280, 530, '2')
     game.blasts = new BlastManager(game)
@@ -25,11 +27,11 @@ export default {
 
   update() {
     this.game.inputManager.update()
-    this.game.castle.update()
+    this.game.spawner.update()
     this.game.ai.update()
   },
 
   render() {
-    this.game.castle.render()
+    this.game.spawner.render()
   }
 }

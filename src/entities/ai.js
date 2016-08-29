@@ -15,7 +15,7 @@ const units = [
 
 export default class ArtificialIntelligence {
   constructor(game) {
-    this.spawner = game.castle
+    this.spawner = game.spawner
     this.game = game
     this.setTimer()
   }

@@ -15,10 +15,11 @@ export default class Ranged extends Unit {
     this.attackSound = game.add.audio('pick')
     this.boomSound = game.add.audio(boomSound)
     this.boomSound.volume = boomVolume
+    this.unitWidth = 30
     this.bullets.forEach(bullet => {
       bullet.explode = () => {
         this.boomSound.play()
-        this.game.blasts.get(bullet.x, bullet.y, Math.pow(bullet.size, 3)/7)
+        this.game.blasts.get(bullet.x, bullet.y, Math.pow(bullet.size, 3)/7, this.direction)
         bullet.kill()
       }
     })
@@ -26,7 +27,7 @@ export default class Ranged extends Unit {
 
   reset(x, y, direction) {
     super.reset(x, y, direction)
-    this.x = this.game.rnd.integerInRange(1, 3) * 20 * direction + x
+    this.x = x
     this.direction = direction
     this.animations.play('idle')
   }
@@ -38,7 +39,7 @@ export default class Ranged extends Unit {
         let bullet = this.bullets.getFirstDead()
         this.attackSound.play()
         this.lifespan = this.game.rnd.integerInRange(2500, 3000)
-        bullet.reset(this.x + 20 * this.direction, this.y - 70)
+        bullet.reset(this.x + 20 * this.direction, this.y - 50)
         bullet.size = size
         bullet.scale.set(size)
         bullet.body.gravity.y = 200

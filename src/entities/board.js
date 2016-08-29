@@ -92,7 +92,7 @@ export default class Board {
     }
     matches.forEach(match => {
       if (match.spawn) {
-        this.game.castle.spawn(match.spawn+'s')
+        this.game.spawner.spawn(match.spawn+'s')
       }
       match.tiles.forEach((tile) => tile.kill())
     })
@@ -187,7 +187,8 @@ export default class Board {
               let shapeVariation = base.map(index => index === 0 ? i : j)
               if (arraysEqual(shapeVariation, frames)) {
                 const index = Math.floor(ind/3)
-                spawn = UNIT_TYPES[index * 4 + frames[0]]
+                const spawnIndex = frames[0] === 2 ? 1 : frames[0] === 3 ? 0 : frames[0]
+                spawn = UNIT_TYPES[index * 4 + spawnIndex ]
                 type = { index, base, shape }
               }
             }
