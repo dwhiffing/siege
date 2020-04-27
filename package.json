@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://github.com/dwhiffing/stellar-pendulum",
+  "homepage": "https://github.com/dwhiffing/ludumdare-2016",
   "scripts": {
     "start": "webpack",
     "build": "webpack --config webpack.production.config.js",
